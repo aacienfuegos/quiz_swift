@@ -34,7 +34,7 @@ struct QuizPlayView: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                         .scaledToFit()
-                }
+				}
                   
                 TextField("Respuesta",
                           text: $answer,
@@ -85,6 +85,14 @@ struct QuizPlayView: View {
                         .frame(width: 30, height: 30)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(lineWidth: 2))
+						.contextMenu{
+							Button("Clear Answer"){
+								answer = ""
+							}
+							Button("Fill Answer"){
+								answer = quizItem.answer
+							}
+						}
                 }
             }
         
