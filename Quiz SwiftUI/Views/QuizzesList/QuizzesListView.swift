@@ -10,24 +10,28 @@ import SwiftUI
 struct QuizzesListView: View {
     
     @EnvironmentObject var quizzesModel: QuizzesModel
+	@EnvironmentObject var scoresModel: ScoresModel
     
     var body: some View {
         
         NavigationView {
-            List {
-                ForEach(quizzesModel.quizzes) { qi in
-                    
-                    NavigationLink(destination: QuizPlayView(quizItem: qi)) {
-                        QuizRowView(quizItem: qi)
-                    }
-                }
-            }
-            .padding()
-            .navigationBarTitle(Text("Quiz SwiftUI"))
-            .onAppear {
-                quizzesModel.load()
-            }
-        }
+			VStack{
+				Text("Record: \(scoresModel.record.count)")
+				List {
+					ForEach(quizzesModel.quizzes) { qi in
+						
+						NavigationLink(destination: QuizPlayView(quizItem: qi)) {
+							QuizRowView(quizItem: qi)
+						}
+					}
+				}
+				.padding()
+				.navigationBarTitle(Text("Quiz SwiftUI"))
+				.onAppear {
+					quizzesModel.load()
+				}
+			}
+		}
     }
 }
 

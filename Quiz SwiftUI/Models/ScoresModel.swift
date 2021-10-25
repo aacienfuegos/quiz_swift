@@ -11,6 +11,15 @@ import Foundation
 class ScoresModel: ObservableObject {
     
     @Published private(set) var acertadas: Set<Int> = []
+	@Published private(set) var record: Set<Int> = []
+	
+	private let defaults = UserDefaults.standard
+	
+	init() {
+		if let record = defaults.object(forKey: "record") as? [Int] {
+			self.record = Set(record)
+		}
+	}
     
     func check(respuesta: String, quiz: QuizItem) {
         
@@ -20,6 +29,8 @@ class ScoresModel: ObservableObject {
         
         if r1 == r2 {
             acertadas.insert(quiz.id)
+			record.insert(quiz.id)
+			defaults.set(Array<Int>(record), forKey: "record")
         }
     
     }
