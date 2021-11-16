@@ -36,10 +36,7 @@ struct QuizzesListView: View {
 				}
 			}
         }
-				}
-			}
-        }
-    }
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {
