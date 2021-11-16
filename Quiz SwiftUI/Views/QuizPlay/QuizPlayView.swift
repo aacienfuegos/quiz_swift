@@ -10,10 +10,15 @@ import SwiftUI
 struct QuizPlayView: View {
     var quizItem: QuizItem
     
+	@EnvironmentObject var quizzesModel: QuizzesModel
     @EnvironmentObject var scoresModel: ScoresModel
+	
     @State var answer: String = ""
     @State var showalert = false
-	@State var angle = 0.0
+	@State var img_angle = 0.0
+	
+	@State var star_angle = 0.0
+	@State var star_scale = 1.0
     
     var body: some View {
         
@@ -31,10 +36,24 @@ struct QuizPlayView: View {
                         .font(.headline)
                         .foregroundColor(.green)
                     
-                    Image(quizItem.favourite ? "star-yellow" : "star-empty")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .scaledToFit()
+					Button(action: {
+						quizzesModel.toggleFavourite(quizItem: quizItem)
+						withAnimation(.spring(response: 1, dampingFraction: 0.3, blendDuration: 1)) {
+							star_angle += 360
+						}
+						DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+							withAnimation(.spring(response: 1, dampingFraction: 0.3, blendDuration: 1)) {
+								star_scale = 1.5 - star_scale
+							}
+						}
+						
+					}, label: {
+						Image(quizItem.favourite ? "star-yellow" : "star-empty")
+							.resizable()
+							.frame(width: 20*CGFloat(star_scale), height: 20*CGFloat(star_scale))
+							.rotationEffect(Angle(degrees: star_angle))
+							.scaledToFit()
+					})
 				}
                   
                 TextField("Respuesta",
@@ -72,11 +91,11 @@ struct QuizPlayView: View {
                         .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 4))
                         .saturation(self.showalert ? 0.1 : 1)
                         .animation(.easeInOut, value: self.showalert)
-						.rotationEffect(Angle(degrees: angle))
+						.rotationEffect(Angle(degrees: img_angle))
                         .onTapGesture( count: 2){
                             answer = quizItem.answer
 							withAnimation(.easeInOut){
-								angle += 360
+								img_angle += 360
 							}
                         }
                 }

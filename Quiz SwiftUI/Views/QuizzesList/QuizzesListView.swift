@@ -38,9 +38,6 @@ struct QuizzesListView: View {
 									}) {
 										Label("Reload", systemImage: "arrow.triangle.2.circlepath")
 									})
-				.onAppear {
-					quizzesModel.download()
-				}
 			}
         }
 	}

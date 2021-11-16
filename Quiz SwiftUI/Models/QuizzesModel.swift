@@ -14,6 +14,10 @@ class QuizzesModel: ObservableObject {
 	
 	let URL_BASE = "https://core.dit.upm.es/api"
 	let TOKEN = "c077a2641b40e0fb129a"
+	
+	init() {
+		download()
+	}
     
     func load() {
                 
@@ -63,6 +67,36 @@ class QuizzesModel: ObservableObject {
 				}
 			} else {
 				print("Error 2: bad request")
+			}
+		}
+		.resume()
+	}
+	
+	func toggleFavourite(quizItem: QuizItem){
+		guard let index = quizzes.firstIndex(where: {qi in
+			qi.id == quizItem.id
+		})else {
+			print("Error interno 1")
+			return
+		}
+		
+		let urlStr = "\(URL_BASE)/users/tokenOwner/favourites/\(quizItem.id)?token=\(TOKEN)"
+		
+		guard let url = URL(string: urlStr) else {
+			print("Error 1: bad URL")
+			return
+		}
+		
+		var req = URLRequest(url: url)
+		req.httpMethod = quizItem.favourite ? "DELETE" : "PUT"
+		req.addValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
+		
+		URLSession.shared.uploadTask(with: req, from: Data()) { _, res, error in
+			if error == nil,
+			   (res as! HTTPURLResponse).statusCode == 200 {
+				self.quizzes[index].favourite.toggle()
+			} else {
+				print("Fav Error 2")
 			}
 		}
 		.resume()
