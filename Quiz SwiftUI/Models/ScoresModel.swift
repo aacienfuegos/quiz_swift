@@ -24,4 +24,8 @@ class ScoresModel: ObservableObject {
     
     }
     
+    func acertada(_ quizItem: QuizItem) -> Bool {
+        return acertadas.contains(quizItem.id)
+    }
+    
 }

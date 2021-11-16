@@ -10,15 +10,20 @@ import SwiftUI
 struct QuizzesListView: View {
     
     @EnvironmentObject var quizzesModel: QuizzesModel
+    @EnvironmentObject var scoresModel: ScoresModel
+    
+    @State var verTodo: Bool = true
     
     var body: some View {
         
         NavigationView {
             List {
+                Toggle("Ver Todo", isOn: $verTodo)
                 ForEach(quizzesModel.quizzes) { qi in
-                    
-                    NavigationLink(destination: QuizPlayView(quizItem: qi)) {
-                        QuizRowView(quizItem: qi)
+                    if verTodo || !scoresModel.acertada(qi){
+                        NavigationLink(destination: QuizPlayView(quizItem: qi)) {
+                            QuizRowView(quizItem: qi)
+                        }
                     }
                 }
             }
