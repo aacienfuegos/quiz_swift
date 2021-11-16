@@ -13,6 +13,7 @@ struct QuizPlayView: View {
     @EnvironmentObject var scoresModel: ScoresModel
     @State var answer: String = ""
     @State var showalert = false
+	@State var angle = 0.0
     
     var body: some View {
         
@@ -64,13 +65,20 @@ struct QuizPlayView: View {
                 
                 GeometryReader { g in
                     NetworkImageView(viewModel: anivm)
-                    .scaledToFill()
-                    .frame(width: g.size.width, height: g.size.height)
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                    .contentShape(RoundedRectangle(cornerRadius: 15))                    .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 4))
-                    .saturation(self.showalert ? 0.1 : 1)
-                    .animation(.easeInOut, value: self.showalert)
-                
+                        .scaledToFill()
+                        .frame(width: g.size.width, height: g.size.height)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .contentShape(RoundedRectangle(cornerRadius: 15))
+                        .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 4))
+                        .saturation(self.showalert ? 0.1 : 1)
+                        .animation(.easeInOut, value: self.showalert)
+						.rotationEffect(Angle(degrees: angle))
+                        .onTapGesture( count: 2){
+                            answer = quizItem.answer
+							withAnimation(.easeInOut){
+								angle += 360
+							}
+                        }
                 }
                     
                 HStack{
