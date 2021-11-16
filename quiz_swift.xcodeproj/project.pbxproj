@@ -21,6 +21,8 @@
 		281872A6270866F3009CBEB2 /* QuizRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281872A5270866F3009CBEB2 /* QuizRowView.swift */; };
 		281872AA2709CF0F009CBEB2 /* QuizPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281872A92709CF0F009CBEB2 /* QuizPlayView.swift */; };
 		281872AF270A01D5009CBEB2 /* ScoresModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281872AE270A01D5009CBEB2 /* ScoresModel.swift */; };
+		429316A627443DC2004A6CFA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 429316A527443DC2004A6CFA /* Launch Screen.storyboard */; };
+		429316AC27443E39004A6CFA /* QUIZ2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 429316AB27443E39004A6CFA /* QUIZ2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		281872A5270866F3009CBEB2 /* QuizRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizRowView.swift; sourceTree = "<group>"; };
 		281872A92709CF0F009CBEB2 /* QuizPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPlayView.swift; sourceTree = "<group>"; };
 		281872AE270A01D5009CBEB2 /* ScoresModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresModel.swift; sourceTree = "<group>"; };
+		429316A527443DC2004A6CFA /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		429316AB27443E39004A6CFA /* QUIZ2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = QUIZ2.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 		2818725827064EA2009CBEB2 = {
 			isa = PBXGroup;
 			children = (
+				429316AB27443E39004A6CFA /* QUIZ2.jpg */,
+				429316A527443DC2004A6CFA /* Launch Screen.storyboard */,
 				2818725D27064EA4009CBEB2 /* Quiz SwiftUI */,
 				2818726727064EAC009CBEB2 /* iOS */,
 				2818726E27064EAC009CBEB2 /* macOS */,
@@ -240,8 +246,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				429316A627443DC2004A6CFA /* Launch Screen.storyboard in Resources */,
 				2818729127077E5D009CBEB2 /* p1_quizzes.json in Resources */,
 				2818727527064EAC009CBEB2 /* Assets.xcassets in Resources */,
+				429316AC27443E39004A6CFA /* QUIZ2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

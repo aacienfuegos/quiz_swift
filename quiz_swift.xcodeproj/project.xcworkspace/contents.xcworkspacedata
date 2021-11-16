@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Launch Screen.storyboard">
+   </FileRef>
+   <FileRef
       location = "self:/Users/aacienfuegos/Desktop/quiz_swift/quiz_swift.xcodeproj">
    </FileRef>
 </Workspace>
