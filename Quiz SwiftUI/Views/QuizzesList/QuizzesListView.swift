@@ -31,8 +31,15 @@ struct QuizzesListView: View {
 				}
 				.padding()
 				.navigationBarTitle(Text("Quiz SwiftUI"))
+				.navigationBarItems(leading: Text("").font(.callout),
+									trailing: Button(action: {
+										quizzesModel.download()
+										scoresModel.limpiar()
+									}) {
+										Label("Reload", systemImage: "arrow.triangle.2.circlepath")
+									})
 				.onAppear {
-					quizzesModel.load()
+					quizzesModel.download()
 				}
 			}
         }

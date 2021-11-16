@@ -17,13 +17,16 @@ struct QuizItem: Codable, Identifiable {
     
     struct Author: Codable {
         let isAdmin: Bool?
-        let username: String
+        let username: String?
+		let accountTypeId: Decimal?
+		let profileId: Decimal?
+		let profileName: String?
         let photo: Attachment?
     }
     
     struct Attachment: Codable {
-        let filename: String
-        let mime: String
+        let filename: String?
+        let mime: String?
         let url: URL?
     }
 }

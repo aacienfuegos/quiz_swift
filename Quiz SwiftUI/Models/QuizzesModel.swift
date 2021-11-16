@@ -11,6 +11,9 @@ class QuizzesModel: ObservableObject {
     
     // Los datos
     @Published private(set) var quizzes = [QuizItem]()
+	
+	let URL_BASE = "https://core.dit.upm.es/api"
+	let TOKEN = "c077a2641b40e0fb129a"
     
     func load() {
                 
@@ -36,4 +39,32 @@ class QuizzesModel: ObservableObject {
             print("Algo chungo ha pasado: \(error)")
         }
     }
+	
+	func download(){
+		let urlStr = "\(URL_BASE)/quizzes/random10wa?token=\(TOKEN)"
+		
+		guard let url = URL(string: urlStr) else {
+			print("Error 1: bad URL")
+			return
+		}
+		
+		URLSession.shared.dataTask(with: url) { (data, response, error) in
+			if error == nil,
+			   (response as! HTTPURLResponse).statusCode == 200,
+			   let data = data {
+				
+				do {
+					let quizzes = try JSONDecoder().decode([QuizItem].self, from: data)
+					DispatchQueue.main.async {
+						self.quizzes = quizzes
+					}
+				} catch {
+					print("Error 3: bad JSON")
+				}
+			} else {
+				print("Error 2: bad request")
+			}
+		}
+		.resume()
+	}
 }
