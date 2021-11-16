@@ -17,21 +17,27 @@ struct QuizzesListView: View {
     var body: some View {
         
         NavigationView {
-            List {
-                Toggle("Ver Todo", isOn: $verTodo)
-                ForEach(quizzesModel.quizzes) { qi in
-                    if verTodo || !scoresModel.acertada(qi){
-                        NavigationLink(destination: QuizPlayView(quizItem: qi)) {
-                            QuizRowView(quizItem: qi)
-                        }
-                    }
-                }
-            }
-            .padding()
-            .navigationBarTitle(Text("Quiz SwiftUI"))
-            .onAppear {
-                quizzesModel.load()
-            }
+			VStack{
+				Text("Record: \(scoresModel.record.count)")
+				List {
+					Toggle("Ver Todo", isOn: $verTodo)
+					ForEach(quizzesModel.quizzes) { qi in
+						if verTodo || !scoresModel.acertada(qi){
+							NavigationLink(destination: QuizPlayView(quizItem: qi)) {
+								QuizRowView(quizItem: qi)
+							}
+						}
+					}
+				}
+				.padding()
+				.navigationBarTitle(Text("Quiz SwiftUI"))
+				.onAppear {
+					quizzesModel.load()
+				}
+			}
+        }
+				}
+			}
         }
     }
 }
